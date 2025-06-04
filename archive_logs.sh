@@ -23,6 +23,7 @@ else
        exit 1
 fi
 
+# check if the folder exists
 if [[ ! -d "$folder" ]]; then
         echo " $folder does not exit!"
         sleep 3
@@ -33,6 +34,8 @@ if [[ ! -d "$folder" ]]; then
 fi
 sleep 2
 clear
+
+#adding time stamp
 time_stamp=$(date "+%Y-%m-%d_%H-%M-%S")
 new_name="${name%.*}_$time_stamp.log"
 path="$HOME/Documents/hospital_data/active_logs/$name"
