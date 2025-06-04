@@ -40,7 +40,7 @@ time_stamp=$(date "+%Y-%m-%d_%H-%M-%S")
 new_name="${name%.*}_$time_stamp.log"
 path="$HOME/Documents/hospital_data/active_logs/$name"
 
-
+#moving the file to a new destination
 if [[ ! -f "$path" ]]; then
         echo "The file does not exist"  
 fi
