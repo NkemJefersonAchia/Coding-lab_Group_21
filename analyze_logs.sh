@@ -1,3 +1,6 @@
+# Beginning of David's Work
+
+# Menu for user input
 #!/usr/bin/bash
 echo " Select a log file to analyze"
 echo "1) Heart Rate (heart_rate.log)"
@@ -16,35 +19,46 @@ else
         exit 1
 fi
 
-if [[ ! -f $HOME/Documents/hospital_data/active_logs/$name ]]; then
+if [[ ! -f hospital_data/active_logs/$name ]]; then
         echo " $name does not exist!!!"
         exit 1
 fi
 
-if [[ ! -d $HOME/Documents/hospital_data/active_logs/reports/ ]]; then
+#This part recreates the Report if it doesn't exist 
+
+if [[ ! -d hospital_data/active_logs/reports/ ]]; then
         echo " Reports directory does not exist."
         echo "creating..."
         sleep 2
         echo "Done!"
         sleep 2
-        mkdir -p $HOME/Documents/hospital_data/active_logs/reports/
+        mkdir -p hospital_data/active_logs/reports/
         clear
 fi
 sleep 2
 echo "Generating report..."
-touch $HOME/Documents/hospital_data/active_logs/reports/analysis_report.txt
+touch hospital_data/active_logs/reports/analysis_report.txt
 sleep 2
+
+
+
+
+# Beginning of Jeferson's work
+#This part of th e code appends all the neccessary files to the report generated
+#and then moves it to the reports dir
+
+
 
 time_stamp=$(date '+%Y-%m-%d %H:%M:%S')
 echo "_____ANALYSIS_____REPORT_____" >> analysis_report.txt
 echo "Date and time created: $time_stamp" >> analysis_report.txt
 echo "Log file: $name" >> analysis_report.txt
 echo " Device counts:" >> analysis_report.txt
-awk '{print $2}' $HOME/Documents/hospital_data/active_logs/$name | sort | uniq -c | wc -l >> analysis_report.txt
-first=$(head -1 $HOME/Documents/hospital_data/active_logs/$name | cut -d ' ' -f1)
-last=$(tail -1 $HOME/Documents/hospital_data/active_logs/$name | cut -d ' ' -f1)
+awk '{print $2}' hospital_data/active_logs/$name | sort | uniq -c | wc -l >> analysis_report.txt
+first=$(head -1 hospital_data/active_logs/$name | cut -d ' ' -f1)
+last=$(tail -1 hospital_data/active_logs/$name | cut -d ' ' -f1)
 echo " Timestamp of first entry: $first" >> analysis_report.txt
 echo " Timestamp of last entry: $last" >> analysis_report.txt
 echo "Report generated successfully in reports/analysis_report!!!"
 
-mv analysis_report.txt $HOME/Documents/hospital_data/reports/analysis_report.txt
+mv analysis_report.txt hospital_data/reports/analysis_report.txt
