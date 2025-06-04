@@ -1,5 +1,6 @@
 # Beginning of David's Work
 
+# Menu for user input
 #!/usr/bin/bash
 echo " Select a log file to analyze"
 echo "1) Heart Rate (heart_rate.log)"
