@@ -1,36 +1,45 @@
-#!/bin/bash
-
-echo "Select a log to archive:"
-echo "1) heart_rate_log.log"
-echo "2) temperature_log.log"
-echo "3) water_usage_log.log"
-read -p "Enter your choice [1-3]: " choice
-
-timestamp=$(date +%Y-%m-%d_%H-%M-%S)
-
-if [ "$choice" = "1" ]; then
-source="hospital_data/active_logs/heart_rate_log.log"
-desti="hospital_data/archived_logs/heart_data_archive/heart_rate_$timestamp.log"
-elif [ "$choice" = "2" ]; then
-source="hospital_data/active_logs/temperature_log.log"
-desti="hospital_data/archived_logs/temperature_data_archive/temperature_$timestamp.log"
-elif [ "$choice" = "3" ]; then
-source="hospital_data/active_logs/water_usage_log.log"
-desti="hospital_data/archived_logs/water_usage_data_archive/water_usage_$timestamp.log"
+#!/usr/bin/bash
+echo "Choose a file"
+echo "1) Heart Rate"
+echo "2) Temperature"
+echo "3) Water Usage"
+echo "Enter a selection : 1,2 or 3"
+read selection
+if [[ "$selection" == "1" ]]; then
+        name="heart_rate_log.log"
+        folder="heart_data_archive"
+elif [[ "$selection" == "2" ]]; then
+        name="temperature_log.log"
+        folder="temperature_data_archive"
+elif [[ "$selection" == "3" ]]; then
+        name="water_usage_log.log"
+        folder="water_usage_data_archive"
 else
-echo "Invalid choice"
-exit 1
+        echo "Invalid! The selection $selection does not exist. Run the script again!!!"
+       exit 1
 fi
 
-if [ ! -f "$source" ]; then
-echo "Log file does not exist. Creating it..."
-mkdir -p "$(dirname "$source")"
-touch "$source"
-echo "Created $source"
+if [[ ! -d "$folder" ]]; then
+        echo " $folder does not exit!"
+        sleep 3
+        echo "Creating . . ."
+        mkdir -p ~/Documents/hospital_data/archived_logs/$folder
+        sleep 3
+        echo "$folder created successfully!!!"
 fi
-mkdir -p "$(dirname "$desti")"
+sleep 2
+clear
+time_stamp=$(date "+%Y-%m-%d_%H-%M-%S")
+new_name="${name%.*}_$time_stamp.log"
+path="$HOME/Documents/hospital_data/active_logs/$name"
 
-mv "$source" "$desti"
-touch "$source"
 
-echo "Archived and reset $source"
+if [[ ! -f "$path" ]]; then
+        echo "The file does not exist"  
+fi
+mv "$path" "$HOME/Documents/hospital_data/archived_logs/$folder/$new_name"
+touch "$path"
+sleep 2
+echo "Archiving $name ..."
+sleep 2
+echo "Successfully archived to $folder/$new_name"
