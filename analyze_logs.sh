@@ -1,7 +1,7 @@
 # Beginning of David's Work
 
 # Menu for user input
-#!/usr/bin/bash
+#!/bin/bash
 echo " Select a log file to analyze"
 echo "1) Heart Rate (heart_rate.log)"
 echo "2) Temperature (temperature.log)"
@@ -22,25 +22,27 @@ else
         exit 1
 fi
 
-if [[ ! -f hospital_data/active_logs/$name ]]; then
+if [[ ! -f active_logs/$name ]]; then
         echo " $name does not exist!!!"
         exit 1
 fi
 
 #This part recreates the Report if it doesn't exist 
 
-if [[ ! -d hospital_data/active_logs/reports/ ]]; then
+if [[ ! -d reports/ ]]; then
         echo " Reports directory does not exist."
         echo "creating..."
         sleep 2
         echo "Done!"
         sleep 2
-        mkdir -p hospital_data/active_logs/reports/
+        mkdir -p reports/
         clear
 fi
 sleep 2
 echo "Generating report..."
-touch hospital_data/active_logs/reports/analysis_report.txt
+#A unique timestamp is addded to each report file to be able to distinguish the report files being generated
+
+time_stamp=$(date '+%Y-%m-%d_%H:%M:%S')
 sleep 2
 
 
@@ -52,16 +54,20 @@ sleep 2
 
 
 
-time_stamp=$(date '+%Y-%m-%d %H:%M:%S')
-echo "_____ANALYSIS_____REPORT_____" >> analysis_report.txt
-echo "Date and time created: $time_stamp" >> analysis_report.txt
-echo "Log file: $name" >> analysis_report.txt
-echo " Device counts:" >> analysis_report.txt
-awk '{print $2}' hospital_data/active_logs/$name | sort | uniq -c | wc -l >> analysis_report.txt
-first=$(head -1 hospital_data/active_logs/$name | cut -d ' ' -f1)
-last=$(tail -1 hospital_data/active_logs/$name | cut -d ' ' -f1)
-echo " Timestamp of first entry: $first" >> analysis_report.txt
-echo " Timestamp of last entry: $last" >> analysis_report.txt
-echo "Report generated successfully in reports/analysis_report!!!"
-
-mv analysis_report.txt hospital_data/reports/analysis_report.txt
+time_stamp=$(date '+%Y-%m-%d_%H:%M:%S')
+{
+	
+	echo "_____ANALYSIS_____REPORT_____"
+	echo "Date and time created: $time_stamp"
+	echo "Log file: $name"
+	echo " Device counts:" 
+	awk '{print $3}' active_logs/$name | sort | uniq -c
+	#
+	#We tackled the bonus question to add the timestamp of the first and last entry
+	#
+	first=$(head -1 active_logs/$name | awk '{print $1, $2}')
+	last=$(tail -1 active_logs/$name | awk '{print $1, $2}')
+	echo " Timestamp of first entry: $first"
+	echo " Timestamp of last entry: $last" 
+} >> reports/analysis_report_$time_stamp.txt
+echo "Report generated successfully in reports directory !!!"

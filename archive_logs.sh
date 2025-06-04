@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 # menu
 echo "Choose a file"
@@ -28,7 +28,7 @@ if [[ ! -d "$folder" ]]; then
         echo " $folder does not exit!"
         sleep 3
         echo "Creating . . ."
-        mkdir -p ~/Documents/hospital_data/archived_logs/$folder
+        mkdir -p archived_logs/$folder
         sleep 3
         echo "$folder created successfully!!!"
 fi
@@ -38,13 +38,13 @@ clear
 #adding time stamp
 time_stamp=$(date "+%Y-%m-%d_%H-%M-%S")
 new_name="${name%.*}_$time_stamp.log"
-path="$HOME/Documents/hospital_data/active_logs/$name"
+path="active_logs/$name"
 
 #moving the file to a new destination
 if [[ ! -f "$path" ]]; then
         echo "The file does not exist"  
 fi
-mv "$path" "$HOME/Documents/hospital_data/archived_logs/$folder/$new_name"
+mv "$path" "archived_logs/$folder/$new_name"
 touch "$path"
 sleep 2
 echo "Archiving $name ..."
