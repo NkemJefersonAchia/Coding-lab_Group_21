@@ -1,9 +1,13 @@
 #!/usr/bin/bash
+
+# menu
 echo "Choose a file"
 echo "1) Heart Rate"
 echo "2) Temperature"
 echo "3) Water Usage"
 echo "Enter a selection : 1,2 or 3"
+
+#user will then chose between 1,2 or 3
 read selection
 if [[ "$selection" == "1" ]]; then
         name="heart_rate_log.log"
@@ -43,3 +47,4 @@ sleep 2
 echo "Archiving $name ..."
 sleep 2
 echo "Successfully archived to $folder/$new_name"
+
