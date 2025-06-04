@@ -1,4 +1,4 @@
-# Begining of David's Work
+# Beginning of David's Work
 
 #!/usr/bin/bash
 echo " Select a log file to analyze"
@@ -43,7 +43,7 @@ sleep 2
 
 
 # Beginning of Jeferson's work
-#This part of th e code appends all the neccessary files to the reprot generated
+#This part of th e code appends all the neccessary files to the report generated
 #and then moves it to the reports dir
 
 
