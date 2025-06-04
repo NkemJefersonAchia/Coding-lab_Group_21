@@ -8,6 +8,9 @@ echo "2) Temperature (temperature.log)"
 echo "3) Water Usage (water_usage.log)"
 echo "Enter choice (1-3)"
 read choice
+
+#This Set log file based on input
+
 if [[ "$choice" == "1" ]]; then
         name="heart_rate_log.log"
 elif [[ "$choice" == "2" ]]; then
