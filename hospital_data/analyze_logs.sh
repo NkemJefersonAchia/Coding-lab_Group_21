@@ -36,7 +36,7 @@ touch $HOME/Documents/hospital_data/active_logs/reports/analysis_report.txt
 sleep 2
 
 time_stamp=$(date '+%Y-%m-%d %H:%M:%S')
-echo "__ANALYSIS__REPORT__" >> analysis_report.txt
+echo "INTELLIGENT__ANALYSIS__REPORT__" >> analysis_report.txt
 echo "Date and time created: $time_stamp" >> analysis_report.txt
 echo "Log file: $name" >> analysis_report.txt
 echo " Device counts:" >> analysis_report.txt
