@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+i#!/usr/bin/bash
 echo " Select a log file to analyze"
 echo "1) Heart Rate (heart_rate.log)"
 echo "2) Temperature (temperature.log)"
@@ -6,7 +6,7 @@ echo "3) Water Usage (water_usage.log)"
 echo "Enter choice (1-3)"
 read choice
 if [[ "$choice" == "1" ]]; then
-        name="heart_rate_log.log"
+ i       name="heart_rate_log.log"
 elif [[ "$choice" == "2" ]]; then
         name="temperature_log.log"
 elif [[ "$choice" == "3" ]]; then
@@ -36,7 +36,7 @@ touch $HOME/Documents/hospital_data/active_logs/reports/analysis_report.txt
 sleep 2
 
 time_stamp=$(date '+%Y-%m-%d %H:%M:%S')
-echo "_____ANALYSIS_____REPORT_____" >> analysis_report.txt
+echo "__ANALYSIS__REPORT__" >> analysis_report.txt
 echo "Date and time created: $time_stamp" >> analysis_report.txt
 echo "Log file: $name" >> analysis_report.txt
 echo " Device counts:" >> analysis_report.txt
